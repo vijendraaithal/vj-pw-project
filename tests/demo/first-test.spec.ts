@@ -7,18 +7,16 @@ test("Should load homepage with correct title", async ({ page }) => {
 });
 
 test(
-  'Should do something', 
-  {tag: ['@smoke'],
-   annotation: 
-    {type:'feature'}
+  "Should do something",
+  { tag: ["@smoke"], annotation: { type: "feature" } },
+  async ({ page, request }, testInfo) => {
+    // steps...
+    /**
+     * test(title, body)
+     * test (title, details, body)
+     *
+     * title => string
+     * body => callback fn {fixture eg: page}, [testInfo]
+     */
   },
-  async({page, request}, testInfo) => {
-  // steps...
-  /**
-   * test(title, body)
-   * test (title, details, body)
-   * 
-   * title => string
-   * body => callback fn {fixture eg: page}, [testInfo]
-   */
-});
+);

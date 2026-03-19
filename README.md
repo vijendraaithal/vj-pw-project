@@ -293,3 +293,18 @@ export default playwright.test;
 ```
 - instead of page, we can pass context or request or others
 
+## DRY Principle 
+- DRY: Don't Repeat Yourself
+- PW team have created fixtures, fixtures are static one time config that we don't have to repeat
+- in older times
+```ts
+let chromeBrowser = new Browser();
+```
+- we put page fixture as test fn argument and use page.goto() methods
+
+- page fixture  - A page is a fixture from playwright runner's perspective, which is passed as an arg to the test object
+- Most commonly used methods
+### Page Fixtures
+![Page Fixtures](images/page_fixtures.png)
+- page.locator returns a locator object, hence we can chain this with other page.locator methods
+
