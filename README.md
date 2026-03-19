@@ -308,3 +308,5 @@ let chromeBrowser = new Browser();
 ![Page Fixtures](images/page_fixtures.png)
 - page.locator returns a locator object, hence we can chain this with other page.locator methods
 
+### Locators Object
+![Locators](images/locator_selector.png)
