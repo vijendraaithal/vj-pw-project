@@ -1,0 +1,17 @@
+{
+  "name": "vj-pw-project",
+  "version": "1.0.0",
+  "description": "Playwright E2D Tests with AI Capabilities including MCP",
+  "keywords": [
+    "playwright",
+    "playwright-e2e-tests",
+    "playwright-mcp"
+  ],
+  "license": "ISC",
+  "author": "VJ",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
