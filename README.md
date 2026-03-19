@@ -443,5 +443,87 @@ npx playwright codegen -b webkit https://example.com
 - try out 'Record at cursor', trick is to stop recording, go to the point where you want to record, enable it and record the the actions/assert
 
 1. First TC: go to the url, click make appointment, provide username and password, click submit, validate a text
-2. Provide wrong password validate the messge
+2. Provide wrong password validate the message
+
+## Refactoring by grouping
+In PW , we have only 4 hooks 
+- test.afterAll
+- test.afterEach
+- test.beforeAll
+- test.beforeEach
+
+Describe is another block
+- test.describe
+
+```ts
+test.describe("Login functionality", () => {
+    
+});
+```
+
+```
+describe(title: string, callback: () => void): void
+Group title.
+
+
+Declares a group of tests.
+
+test.describe(title, callback)
+test.describe(callback)
+test.describe(title, details, callback)
+Usage
+
+You can declare a group of tests with a title. The title will be visible in the test report as a part of each test's title.
+```
+```ts
+import { test, expect } from "@playwright/test";
+
+test.describe("Login functionality", () => {
+  test("Should login successfully", async ({ page }) => {
+    // 1. Launch URL
+    await page.goto("https://katalon-demo-cura.herokuapp.com/");
+
+    // 2. Click on Make Appointment
+    await page.getByRole("link", { name: "Make Appointment" }).click();
+    await expect(page.getByText("Please login to make")).toBeVisible();
+
+    // 3. Login
+    await page.getByLabel("Username").fill("John Doe");
+    await page.getByLabel("Password").fill("ThisIsNotAPassword");
+    await page.getByRole("button", { name: "Login" }).click();
+
+    // 4. Assert a text
+    await expect(page.locator("h2")).toContainText("Make Appointment");
+    await page.close();
+  });
+
+  test("Should prevent login with incorrect credentials", async ({ page }) => {
+    // 1. Launch URL
+    await page.goto("https://katalon-demo-cura.herokuapp.com/");
+
+    // 2. Click on Make Appointment
+    await page.getByRole("link", { name: "Make Appointment" }).click();
+    await expect(page.getByText("Please login to make")).toBeVisible();
+
+    // 3. Login
+    await page.getByLabel("Username").fill("John Smith");
+    await page.getByLabel("Password").fill("ThisIsNotAPassword");
+    await page.getByRole("button", { name: "Login" }).click();
+
+    // 4. Assert a text
+    await expect(page.locator("#login")).toContainText(
+      "Login failed! Please ensure the username and password are valid.",
+    );
+    await page.close();
+  });
+});
+```
+**Hooks Concept**
+
+***beforeEach()***
+- hook that runs before every test
+- test.beforeEach("Go to login page", callbackfn)
+- place going to login page code inside the callbackfn
+- now beforeEach() runs before each of the test
+- similarly we can have afterEach() that runs after each of the test
 

@@ -1,39 +1,40 @@
 import { test, expect } from "@playwright/test";
 
-test("Should login successfully", async ({ page }) => {
-  // 1. Launch URL
-  await page.goto("https://katalon-demo-cura.herokuapp.com/");
+test.describe("Login functionality", () => {
 
-  // 2. Click on Make Appointment
-  await page.getByRole("link", { name: "Make Appointment" }).click();
-  await expect(page.getByText("Please login to make")).toBeVisible();
+  test.beforeEach("Go to Login Page", async ({ page }) => {
+    // 1. Launch URL
+    await page.goto("https://katalon-demo-cura.herokuapp.com/");
 
-  // 3. Login
-  await page.getByLabel("Username").fill("John Doe");
-  await page.getByLabel("Password").fill("ThisIsNotAPassword");
-  await page.getByRole("button", { name: "Login" }).click();
+    // 2. Click on Make Appointment
+    await page.getByRole("link", { name: "Make Appointment" }).click();
+    await expect(page.getByText("Please login to make")).toBeVisible();
+  });
 
-  // 4. Assert a text
-  await expect(page.locator("h2")).toContainText("Make Appointment");
-  await page.close();
-});
+  test("Should login successfully", async ({ page }) => {
+    // 3. Login
+    await page.getByLabel("Username").fill("John Doe");
+    await page.getByLabel("Password").fill("ThisIsNotAPassword");
+    await page.getByRole("button", { name: "Login" }).click();
 
-test("Should prevent login with incorrect credentials", async ({ page }) => {
-  // 1. Launch URL
-  await page.goto("https://katalon-demo-cura.herokuapp.com/");
+    // 4. Assert a text
+    await expect(page.locator("h2")).toContainText("Make Appointment");
+  });
 
-  // 2. Click on Make Appointment
-  await page.getByRole("link", { name: "Make Appointment" }).click();
-  await expect(page.getByText("Please login to make")).toBeVisible();
+  test("Should prevent login with incorrect credentials", async ({ page }) => {
+    // 3. Login
+    await page.getByLabel("Username").fill("John Smith");
+    await page.getByLabel("Password").fill("ThisIsNotAPassword");
+    await page.getByRole("button", { name: "Login" }).click();
 
-  // 3. Login
-  await page.getByLabel("Username").fill("John Smith");
-  await page.getByLabel("Password").fill("ThisIsNotAPassword");
-  await page.getByRole("button", { name: "Login" }).click();
+    // 4. Assert a text
+    await expect(page.locator("#login")).toContainText(
+      "Login failed! Please ensure the username and password are valid.",
+    );
+  });
 
-  // 4. Assert a text
-  await expect(page.locator("#login")).toContainText(
-    "Login failed! Please ensure the username and password are valid.",
-  );
-  await page.close();
+  test.afterEach("Close the browser", async ({ page }) => {
+    await page.close();
+  });
+  
 });
