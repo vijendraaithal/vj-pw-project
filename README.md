@@ -310,3 +310,10 @@ let chromeBrowser = new Browser();
 
 ### Locators Object
 ![Locators](images/locator_selector.png)
+
+### Expect Function
+- used for assertion, to find bugs
+- what is signature: takes value and returns Matchers
+![Locators](images/expect_function.png)
+
+[Assertion](https://playwright.dev/docs/test-assertions)
