@@ -395,8 +395,10 @@ It is a big productivity boost
 - Record at Cursor
 - provides prjects ( chromium and others )
 - settings section (show borser, trace viewer etc)
-- ![Codegen run options](/images/codegen_run_options.png)
-- ![Codegen Test Explorer & Playwright](/images/codegen_test_explorer.png)
+
+  <img src="images/codegen_run_options.png" width="50%" alt="Codegen run options" />
+
+  <img src="images/codegen_test_explorer.png" width=50% alt="Codegen Test Explorer & Playwright" />
 
 ### Option 2: Command Line Interface (CLI)
 
@@ -422,3 +424,24 @@ npx playwright codegen -b webkit https://example.com
 - Automation scripts and advanced workflows
 
 🎯 **Codegen** can drastically reduce your test writing time and help you learn the best locator strategies along the way.
+
+# Codegen Demo
+- npx playwright codegen <url>
+- click flask icon, click 'Record new' => test-1.spec.ts will by default go to tests folder , there will be Playwright codegen:recording ... going on 
+- Bring the recording window and Codegen test explorer in view
+- put the cursor in right place, do action on the application
+- Red dot => recording
+- Pick Locator 
+- eye icon , Assert visibility
+- ab icon, Assert text
+- provide confirmation on assert
+- as we have ran through the application, code is generated
+- CMD + L + A => format
+- provide some comments for the Codegen generated code
+- under functional folder, crate a new file login.spect.ts, move the code
+- recheck the recorded flow, provide meaningful name to the test
+- try out 'Record at cursor', trick is to stop recording, go to the point where you want to record, enable it and record the the actions/assert
+
+1. First TC: go to the url, click make appointment, provide username and password, click submit, validate a text
+2. Provide wrong password validate the messge
+
