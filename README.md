@@ -537,3 +537,6 @@ test.describe("Login functionality", () => {
 - locator are LAZY until an action is fired on them
 
 - Note: if a method returns a Promise, it has to be awaited
+
+# Pick Locator from Codegen 
+- fire up Codegen from UI or CLI, then use the pick locator icon 
