@@ -363,4 +363,62 @@ let chromeBrowser = new Browser();
 More info on <a href="https://playwright.dev/docs/test-assertions" target="_blank">Assertion</a>
 
 ### await Keyword
+
 ![await](/images/await.png)
+
+# Codegen
+
+1. What it does
+
+- records test flow
+- generates best locators
+
+2. What are its benefits
+
+- reduces test writing time drastically
+- no more brittle/flaky selectors
+- record at cursor - enables adding locators in the middle of test flow
+
+It is a big productivity boost
+
+### Option 1: Install VS Code Extension
+
+1. VSCode Extension - Playwright Test for VS Code from Microsoft
+
+- [CMD + SHIFT + P => Command Palette] and type reload window
+
+2. Triangle symbol with options to run, debug, reveal ... etc
+3. Test flask icon => Test Explorer and Playwright window
+
+- Pick locator
+- Record new
+- Record at Cursor
+- provides prjects ( chromium and others )
+- settings section (show borser, trace viewer etc)
+- ![Codegen run options](/images/codegen_run_options.png)
+- ![Codegen Test Explorer & Playwright](/images/codegen_test_explorer.png)
+
+### Option 2: Command Line Interface (CLI)
+
+1. View available options:
+
+```sh
+npx playwright codegen --help
+```
+
+2. Run with or without a URL:
+
+```sh
+npx playwright codegen
+npx playwright codegen https://katalon-demo-cura.herokuapp.com/
+npx playwright codegen --target=python
+npx playwright codegen -b webkit https://example.com
+```
+
+[💡] **Use CLI for**
+
+- Device emulation
+- Custom viewport settings
+- Automation scripts and advanced workflows
+
+🎯 **Codegen** can drastically reduce your test writing time and help you learn the best locator strategies along the way.
