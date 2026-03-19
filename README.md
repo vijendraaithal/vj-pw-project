@@ -1,30 +1,37 @@
 # Node.js Project Setup
 
 ## Steps
+
 1. **Create a project folder:**
+
 ```sh
 mkdir ~/Documents/workspace/playwright-e2e-tests
 cd ~/Documents/workspace/playwright-e2e-tests
 ```
 
 2. **Open in VS Code:**
+
 ```sh
 code .
 ```
 
 3. **Initialize Node.js project:**
+
 ```sh
 npm init
 ```
-   - Complete the wizard. Ensure `package.json` is created.
+
+- Complete the wizard. Ensure `package.json` is created.
 
 4. **Create a sample file:**
+
 ```ts
 // file name: hello.js
-console.log('Hello World!')
+console.log("Hello World!");
 ```
 
 5. **Run the code:**
+
 ```sh
 node hello.js
 # Output: Hello World!
@@ -33,26 +40,33 @@ node hello.js
 # Playwright Installation
 
 ## Steps
+
 1. **Check if Node.js is installed:**
+
 ```sh
 node -v
 ```
+
 - Returns a valid node version (e.g. `v22.16.0`). If not, install Node.js first.
 
 2. **Navigate to your project directory:**
+
 ```sh
 cd /path/to/your/project
 ```
 
 3. **Initialize Playwright:**
+
 ```sh
 npm init playwright@latest
 ```
+
 - When prompted:
   - Select `TypeScript` as the language
   - Choose to install **all browsers**
 
 4. **Verify Playwright installation:**
+
 ```sh
 npx playwright --version
 ```
@@ -60,45 +74,53 @@ npx playwright --version
 # Run the Generated Test
 
 ## Steps
+
 1. **Run the sample test:**
+
 ```sh
 npx playwright test --headed
 ```
+
 - This command runs all Playwright tests in headed mode (browser UI visible).
 
 2. **Show the test report:**
+
 ```sh
 npx playwright show-report
 ```
+
 - This command opens the Playwright HTML report for your test run.
 
 ---
 
-__Note__: In Windows, If you get an error on running `webkit` browser, add the following config to ignore SSL cert
+**Note**: In Windows, If you get an error on running `webkit` browser, add the following config to ignore SSL cert
 
 ```ts
 use: {
     ignoreHTTPSErrors: true,
   },
 ```
+
 ---
+
 ## Naming Convention - Best Practice:
 
 ### 16.2. File & Code Naming Conventions
 
-| Item                    | Convention                                     | Example                                               |
-|-------------------------|------------------------------------------------|-------------------------------------------------------|
-| **Folders / Files**     | kebab-case                                     | `page-objects/`, `file-helper.ts`                    |
-| **Page and Spec files** | dot-separated                                  | `nopcommerce.home.page.ts`, `nopcommerce.e2e.spec.ts` |
-| **Class Names**         | PascalCase (each word capitalized)             | `LoginPage`, `DashboardActions`                       |
-| **Variables**           | camelCase                                      | `loginButton`, `userNameInput`                        |
-| **Constants**           | UPPER_SNAKE_CASE                               | `BASE_URL`, `API_TIMEOUT_MS`                          |
+| Item                    | Convention                         | Example                                               |
+| ----------------------- | ---------------------------------- | ----------------------------------------------------- |
+| **Folders / Files**     | kebab-case                         | `page-objects/`, `file-helper.ts`                     |
+| **Page and Spec files** | dot-separated                      | `nopcommerce.home.page.ts`, `nopcommerce.e2e.spec.ts` |
+| **Class Names**         | PascalCase (each word capitalized) | `LoginPage`, `DashboardActions`                       |
+| **Variables**           | camelCase                          | `loginButton`, `userNameInput`                        |
+| **Constants**           | UPPER_SNAKE_CASE                   | `BASE_URL`, `API_TIMEOUT_MS`                          |
 
 ---
 
 🎯 **Consistent naming improves readability and reduces confusion across teams.**
 
 ---
+
 # Folder Structure Setup
 
 Let's create the following folder structure:
@@ -135,6 +157,7 @@ PLAYWRIGHT-E2E-TESTS/
 ```
 
 ---
+
 # Recommended VS Code Extensions
 
 - vscode-icons
@@ -149,15 +172,16 @@ PLAYWRIGHT-E2E-TESTS/
 
 Install these extensions from the VS Code Extensions Marketplace for a smoother and more productive workflow.
 
-
 ### 3.1. Creating a basic test
+
 Playwright - 'A person who writes plays'
 
 [💡] Playwright recognizes the following file extensions as valid test specification files:
-  - `*.spec.ts`
-  - `*.test.ts`
 
-__STEPS__:
+- `*.spec.ts`
+- `*.test.ts`
+
+**STEPS**:
 
 1. Create a spec file `first-test.spec.ts` under the `./demo` folder
 2. Add the following test code:
@@ -169,20 +193,21 @@ __STEPS__:
 import { test, expect } from "@playwright/test";
 
 test("Should load home page with correct title", async ({ page }) => {
-    // Go to the home page
-    await page.goto("https://katalon-demo-cura.herokuapp.com/");
+  // Go to the home page
+  await page.goto("https://katalon-demo-cura.herokuapp.com/");
 
-    // Assert if the title is correct
-    await expect(page).toHaveTitle("CURA Healthcare Service");
+  // Assert if the title is correct
+  await expect(page).toHaveTitle("CURA Healthcare Service");
 
-    // Assert header text
-    await expect(page.locator('//h1')).toHaveText('CURA Healthcare providr')
+  // Assert header text
+  await expect(page.locator("//h1")).toHaveText("CURA Healthcare providr");
 });
 ```
+
 </details>
 
 3. Run this specific test file
-   
+
 ```sh
 npx playwright test tests/demo/first-test.spec.ts --headed
 ```
@@ -193,25 +218,26 @@ npx playwright test tests/demo/first-test.spec.ts --headed
 npx playwright test --help
 ```
 
-🎯 Congrats! We wrote a simple test, now let's understand each line. 
+🎯 Congrats! We wrote a simple test, now let's understand each line.
 
 ---
 
 # Common Errors and Resolutions
 
-
 ## 1. Spec/test file not having `.spec or .test` init
 
 **Error:**
+
 - No tests found
 
 **Resolution:**
-- Correct the spec file name
 
+- Correct the spec file name
 
 ## 2. Navigation Timeout Error
 
 **Error:**
+
 ```log
 Error: page.goto: Test ended.
 Call log:
@@ -235,85 +261,106 @@ use: {
      - Navigation actions in page objects
 
 ---
+
 ### Running a Test via `package.json` Scripts
 
 1. Add a new script entry named `demo` inside the `scripts` section of your `package.json` file:
+
 ```json
 "scripts": {
   "demo": "npx playwright test tests/demo/first-test.spec.ts --headed"
 }
 ```
+
 2. Execute the test by running the following command in your terminal:
+
 ```sh
 npm run demo
 ```
+
 [💡] This approach helps you avoid typing long commands repeatedly.
 
 🎯 The first BIG step forward ...
 
 ---
+
 # Playwright Core Concepts
 
 ## Playwright Test Runner
+
 - Own built in Test Runner (No external runners like Mocha, Jest, Jasmine)
 - Powerful Config file (Controls overall test settings incl browsers, reporters, parallel runs)
 - test, expect, request some of the most used functions, built in request library, we don't need external library like Axios or SuperTest
 
 ### Most used import from Playwright runner
+
 ```ts
-export const chromium
-export const firefox
-export const webkit
-export const selectors
-export const devices
-export const errors
-export const request
-export const _electron
-export const _android
-export const test
-export const expect
-export const defineConfig
-export const mergeTests
-export const mergeExpects
+export const chromium;
+export const firefox;
+export const webkit;
+export const selectors;
+export const devices;
+export const errors;
+export const request;
+export const _electron;
+export const _android;
+export const test;
+export const expect;
+export const defineConfig;
+export const mergeTests;
+export const mergeExpects;
 export default playwright.test;
 ```
 
 ## Playwright test() function
+
 ```ts
-  test('Should do something', async({page}) => {
-    // steps...
-    /**
-     * test(title, body)
-     * test (title, details, body)
-     * 
-     * title => string
-     * body => callback fn {fixture eg: page}, [testInfo]
-     */
-  });
+test("Should do something", async ({ page }) => {
+  // steps...
+  /**
+   * test(title, body)
+   * test (title, details, body)
+   *
+   * title => string
+   * body => callback fn {fixture eg: page}, [testInfo]
+   */
+});
 ```
+
 - instead of page, we can pass context or request or others
 
-## DRY Principle 
+## DRY Principle
+
 - DRY: Don't Repeat Yourself
 - PW team have created fixtures, fixtures are static one time config that we don't have to repeat
 - in older times
+
 ```ts
 let chromeBrowser = new Browser();
 ```
+
 - we put page fixture as test fn argument and use page.goto() methods
 
-- page fixture  - A page is a fixture from playwright runner's perspective, which is passed as an arg to the test object
+- page fixture - A page is a fixture from playwright runner's perspective, which is passed as an arg to the test object
 - Most commonly used methods
+
 ### Page Fixtures
+
 ![Page Fixtures](images/page_fixtures.png)
+
 - page.locator returns a locator object, hence we can chain this with other page.locator methods
 
 ### Locators Object
+
 ![Locators](images/locator_selector.png)
 
 ### Expect Function
+
 - used for assertion, to find bugs
 - what is signature: takes value and returns Matchers
-![Locators](images/expect_function.png)
+  ![Locators](images/expect_function.png)
 
 More info on <a href="https://playwright.dev/docs/test-assertions" target="_blank">Assertion</a>
+
+### await Keyword
+![await](/images/await.png)
