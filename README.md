@@ -527,3 +527,13 @@ test.describe("Login functionality", () => {
 - now beforeEach() runs before each of the test
 - similarly we can have afterEach() that runs after each of the test
 
+***afterEach()***
+- hook that runs after every test
+
+# Locator Strategy
+- `page.getBy*()` and `page.locator()` method returns the `locator object`
+- above methods are not awaited
+- the tpe of locator is an object
+- locator are LAZY until an action is fired on them
+
+- Note: if a method returns a Promise, it has to be awaited

@@ -20,3 +20,19 @@ test(
      */
   },
 );
+
+test.only("Should demo locators", async ({ page }) => {
+  // 1. Launch URL
+  await page.goto("https://katalon-demo-cura.herokuapp.com/");
+
+  // 2. Click on Make Appointment
+  // await page.getByRole("link", { name: "Make Appointment" }).click();
+  const makeAppointmentBtn = page.getByRole("link", {
+    name: "Make Appointment",
+  });
+  console.log(
+    `>> the type of locator: ${typeof makeAppointmentBtn}, The value of the locator is ${JSON.stringify(makeAppointmentBtn)}`,
+  );
+  await makeAppointmentBtn.click();
+  await expect(page.getByText("Please login to make")).toBeVisible();
+});
