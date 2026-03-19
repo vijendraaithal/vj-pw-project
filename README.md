@@ -252,3 +252,26 @@ npm run demo
 🎯 The first BIG step forward ...
 
 ---
+### Playwright Test Runner
+- Own built in Test Runner (No external runners like Mocha, Jest, Jasmine)
+- Powerful Config file (Controls overall test settings incl browsers, reporters, parallel runs)
+- test, expect, request some of the most used functions, built in request library, we don't need external library like Axios or SuperTest
+
+### Most used import from Playwright runner
+```ts
+export const chromium
+export const firefox
+export const webkit
+export const selectors
+export const devices
+export const errors
+export const request
+export const _electron
+export const _android
+export const test
+export const expect
+export const defineConfig
+export const mergeTests
+export const mergeExpects
+export defualt playwright.test;
+```
